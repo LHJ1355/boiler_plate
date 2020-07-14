@@ -1,0 +1,11 @@
+{
+  "name": "boiler_plate",
+  "version": "1.0.0",
+  "description": "react and express boiler_plate",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "LeeHyeonJun",
+  "license": "ISC"
+}
