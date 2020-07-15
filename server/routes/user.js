@@ -3,7 +3,7 @@ const router = express.Router();
 const {User} = require('../models/User')
 const {Auth} = require('../middleware/Auth')
 
-router.get('/Auth', Auth, (req, res) => {
+router.get('/auth', Auth, (req, res) => {
     res.status(200).json({isAuth : true, isAdmin : req.user.role === 0 ? false : true});
 })
 
@@ -41,12 +41,12 @@ router.get('/logout', Auth, (req, res) => {
     })
 })
 
-router.post('/signin', (req, res) => {
+router.post('/signup', (req, res) => {
     const user = new User(req.body);
 
     user.save((err, doc) => {
-        if(err) return res.json({ signinSuccess : false, err : err});
-        res.status(200).json({signinSuccess : true})
+        if(err) return res.json({ signupSuccess : false, err : err});
+        res.status(200).json({signupSuccess : true})
     })
 })
 

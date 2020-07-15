@@ -1,3 +1,3 @@
 boiler_plate 
 
-react, express, mongodb
+nodejs, react, mongodb
