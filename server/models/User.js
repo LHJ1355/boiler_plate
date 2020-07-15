@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
+const saltRound = 10;
 
 const userSchema = mongoose.Schema({
     name : {
@@ -34,5 +37,41 @@ const userSchema = mongoose.Schema({
     }
 })
 
+userSchema.pre('save', function( next ) {
+    var user = this;
+    if(user.isModified('password')){    
+        bcrypt.genSalt(saltRounds, function(err, salt){
+            if(err) return next(err);
+        
+            bcrypt.hash(user.password, salt, function(err, hash){
+                if(err) return next(err);
+                user.password = hash 
+                next()
+            })
+        })
+    } else {
+        next()
+    }
+});
+
+userSchema.methods.comparePassword = function(plainPassword, cb){
+    var user = this;
+
+    bcrypt.compare(plainPassword, this.password, (err, isMatch) => {
+        if(err) return cb(err);
+        cb(null, isMatch);
+    })
+}
+
+userSchema.methods.genToken = function(cb){
+    user = this;
+    const token = jwt.sign(user._id.toHexString(), 'secret');
+
+    user.token = token;
+    user.save((err, doc) => {
+        if(err) return cb(err);
+        cb(null, doc.token);
+    })
+}
 const User = mongoose.model('User', userSchema);
 module.exports = {User} ;
