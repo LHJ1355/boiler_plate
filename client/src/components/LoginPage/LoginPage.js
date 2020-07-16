@@ -6,12 +6,16 @@ export default function(props){
 
     const [Email, setEmail] = useState('');
     const [Password , setPassword] = useState('');
+    const [Checked, setChecked] = useState(false);
 
     const onEmailHandler = (event) => {
         setEmail(event.currentTarget.value);
     }
     const onPasswordHandler = (event) => {
         setPassword(event.currentTarget.value);
+    }
+    const onCheckedHandler = (event) => {
+        setChecked(event.currentTarget.checked);
     }
     const onSubmitHandler = (event) => {
         event.preventDefault();
@@ -23,11 +27,13 @@ export default function(props){
         dispatch(loginUser(body))
         .then((res) => {
             if(res.payload.loginSuccess) {
-               props.history.push('/');
+                if(Checked) window.localStorage.setItem('userId', res.payload.userId);
+                props.history.push('/');
             } else alert('Login Failed');
         });
         
     }
+    
     return (
         <div style={{
             display : 'flex', justifyContent : 'center',
@@ -39,6 +45,7 @@ export default function(props){
                 <input type="email" value={Email} onChange={onEmailHandler}/>
                 <label>Password</label>
                 <input type="password" value={Password} onChange={onPasswordHandler}/>
+                <input type="checkbox" checked={Checked} onChange={onCheckedHandler}/>
                 <br/>
                 <button>Login</button>
             </form>

@@ -70,7 +70,7 @@ userSchema.methods.genToken = function(cb){
     user.token = token;
     user.save((err, doc) => {
         if(err) return cb(err);
-        cb(null, doc.token);
+        cb(null, doc);
     })
 }
 const User = mongoose.model('User', userSchema);

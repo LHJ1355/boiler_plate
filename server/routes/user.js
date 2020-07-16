@@ -25,9 +25,9 @@ router.post('/login', (req, res) => {
                 })
             }
 
-            user.genToken((err, token) => {
+            user.genToken((err, doc) => {
                 if(err) res.status(400).send(err);
-                res.status(200).cookie("w_auth" , token).json({ loginSuccess : true, userId : token});
+                res.status(200).cookie("w_auth" , doc.token).json({ loginSuccess : true, userId : doc._id});
             })
         })
 
@@ -47,6 +47,16 @@ router.post('/signup', (req, res) => {
     user.save((err, doc) => {
         if(err) return res.json({ signupSuccess : false, err : err});
         res.status(200).json({signupSuccess : true})
+    })
+})
+
+router.post('/checkkeeplogged', (req, res) => {
+    User.findOne({_id : req.body.userId}, (err, user) => {
+        if(err) return res.status(400).send(err);
+        user.genToken((err, doc) => {
+            if(err) res.status(400).send(err);
+            res.status(200).cookie("w_auth" , doc.token).json({success :true});
+        })
     })
 })
 
