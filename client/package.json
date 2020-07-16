@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^4.4.2",
+    "antd": "^3.24.1",
     "axios": "^0.19.2",
     "http-proxy-middleware": "^1.0.5",
     "react": "^16.13.1",
@@ -36,7 +36,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "@ant-design/icons": "^4.2.1"
-  }
+  "devDependencies": {}
 }

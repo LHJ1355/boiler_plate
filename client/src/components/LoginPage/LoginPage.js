@@ -22,8 +22,9 @@ export default function(props){
         }    
         dispatch(loginUser(body))
         .then((res) => {
-            if(res.payload.loginSuccess) props.history.push('/');
-            else alert('Login Failed');
+            if(res.payload.loginSuccess) {
+               props.history.push('/');
+            } else alert('Login Failed');
         });
         
     }

@@ -27,7 +27,7 @@ router.post('/login', (req, res) => {
 
             user.genToken((err, token) => {
                 if(err) res.status(400).send(err);
-                res.status(200).cookie("w_auth" , token).json({ loginSuccess : true});
+                res.status(200).cookie("w_auth" , token).json({ loginSuccess : true, userId : token});
             })
         })
 

@@ -14,7 +14,6 @@ import Reducer from './_reducers'
 const createStoreWithMiddleware = applyMiddleware( promiseMiddleware, reduxThunk )(createStore)
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={createStoreWithMiddleware( 
       Reducer,
       window.__REDUX_DEVTOOLS_EXTENSION__ &&
@@ -23,8 +22,7 @@ ReactDOM.render(
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById('root')
 );
 

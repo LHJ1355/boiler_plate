@@ -1,6 +1,8 @@
 import axios from 'axios'
+import {USER_SERVER} from '../components/Config'
+
 function loginUser(dataToSubmit){
-    const req = axios.post('/api/user/login', dataToSubmit)
+    const req = axios.post(`${USER_SERVER}/login`, dataToSubmit)
     .then((res) => res.data)  
     .catch(err => console.log(err));
     
@@ -11,7 +13,7 @@ function loginUser(dataToSubmit){
 }
 
 function signupUser(dataToSubmit){
-    const req = axios.post('/api/user/signup', dataToSubmit)
+    const req = axios.post(`${USER_SERVER}/signup`, dataToSubmit)
     .then((res) => res.data)  
     .catch(err => console.log(err));
     
@@ -22,7 +24,7 @@ function signupUser(dataToSubmit){
 }
 
 function auth(){
-    const req = axios.get('/api/user/auth')
+    const req = axios.get(`${USER_SERVER}/auth`)
     .then(res => res.data)
     .catch(err => console.log(err));
 
